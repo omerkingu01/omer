@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Nächste Generation Interaktive Seite</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        :root {
+            --primary: #4e54c8;
+            --secondary: #8f94fb;
+            --accent: #ff6b6b;
+            --background: #f2f5f9;
+            --card-bg: #ffffff;
+            --dark: #2d2d2d;
+            --transition: all 0.3s ease;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: var(--background);
+            color: var(--dark);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 40px;
+            background: linear-gradient(90deg, var(--primary), var(--secondary));
+            color: #fff;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            animation: fadeInDown 1s ease forwards;
+        }
+
+        header h1 {
+            font-size: 1.8rem;
+        }
+
+        nav a {
+            color: #fff;
+            margin-left: 20px;
+            text-decoration: none;
+            font-weight: 500;
+            position: relative;
+        }
+
+        nav a::after {
+            content: '';
+            width: 0;
+            height: 2px;
+            background: var(--accent);
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            transition: var(--transition);
+        }
+
+        nav a:hover::after {
+            width: 100%;
+        }
+
+        .hero {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            text-align: center;
+            padding: 100px 20px;
+            background: linear-gradient(135deg, var(--secondary), var(--primary));
+            color: #fff;
+            animation: fadeIn 1.5s ease forwards;
+        }
+
+        .hero h2 {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+        }
+
+        .hero p {
+            max-width: 700px;
+            font-size: 1.1rem;
+        }
+
+        .features, .projects, .charts, .contact {
+            padding: 60px 20px;
+            max-width: 1200px;
+            margin: auto;
+        }
+
+        .features h3, .projects h3, .charts h3, .contact h3 {
+            text-align: center;
+            font-size: 2rem;
+            margin-bottom: 40px;
+            position: relative;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+        }
+
+        .card {
+            background: var(--card-bg);
+            border-radius: 15px;
+            padding: 20px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+            transition: var(--transition);
+            cursor: pointer;
+            position: relative;
+        }
+
+        .card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.15);
+        }
+
+        .projects img {
+            width: 100%;
+            border-radius: 10px;
+            margin-bottom: 15px;
+            object-fit: cover;
+            height: 150px;
+        }
+
+        canvas {
+            max-width: 100%;
+            background: #fff;
+            border-radius: 15px;
+            padding: 20px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+        }
+
+        .contact form {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            max-width: 600px;
+            margin: auto;
+        }
+
+        .contact input, .contact textarea {
+            padding: 15px;
+            border: 1px solid #ddd;
+            border-radius: 10px;
+            font-size: 1rem;
+            resize: none;
+        }
+
+        .contact button {
+            padding: 15px;
+            background: var(--primary);
+            color: #fff;
+            border: none;
+            border-radius: 10px;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .contact button:hover {
+            background: var(--accent);
+        }
+
+        footer {
+            text-align: center;
+            padding: 20px;
+            background: var(--dark);
+            color: #fff;
+        }
+
+        @keyframes fadeInDown {
+            0% { opacity: 0; transform: translateY(-30px); }
+            100% { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes fadeIn {
+            0% { opacity: 0; transform: scale(0.95); }
+            100% { opacity: 1; transform: scale(1); }
+        }
+
+        @media (max-width: 768px) {
+            header {
+                flex-direction: column;
+                text-align: center;
+            }
+            nav {
+                margin-top: 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>NächsteGen Fortgeschritten</h1>
+        <nav>
+            <a href="#features">Funktionen</a>
+            <a href="#projects">Projekte</a>
+            <a href="#charts">Diagramme</a>
+            <a href="#contact">Kontakt</a>
+        </nav>
+    </header>
+
+    <section class="hero">
+        <h2>Grenzen des Webs verschieben: Interaktiv & Datenbasiert</h2>
+        <p>Diese Seite kombiniert modernes Design, ein responsives Layout und Live-Datenvisualisierung, um fortgeschrittene Fähigkeiten in Frontend-Entwicklung und dynamischer JavaScript-Integration zu zeigen.</p>
+    </section>
+
+    <section id="features" class="features">
+        <h3>Erweiterte Funktionen</h3>
+        <div class="grid">
+            <div class="card">
+                <h4>Responsives Design</h4>
+                <p>Anpassungsfähige Layouts auf allen Geräten mit CSS Grid und Flexbox.</p>
+            </div>
+            <div class="card">
+                <h4>Dynamische Diagramme</h4>
+                <p>Live-Datenvisualisierungen mit Chart.js für mehr Interaktivität.</p>
+            </div>
+            <div class="card">
+                <h4>Optimierter Code</h4>
+                <p>Minimierte Ressourcen, flüssige Animationen und semantisches HTML5.</p>
+            </div>
+            <div class="card">
+                <h4>Modulare Struktur</h4>
+                <p>Codebasis ist skalierbar und leicht mit APIs erweiterbar.</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="projects" class="projects">
+        <h3>Vorgestellte Arbeiten</h3>
+        <div class="grid">
+            <div class="card">
+                <img src="https://source.unsplash.com/300x200/?coding" alt="Projekt 1">
+                <h4>Code Optimierer</h4>
+                <p>Ein Tool, das Ihre JavaScript-Leistung analysiert und verbessert.</p>
+            </div>
+            <div class="card">
+                <img src="https://source.unsplash.com/300x200/?dashboard" alt="Projekt 2">
+                <h4>Live-Dashboard</h4>
+                <p>Interaktives Dashboard mit Echtzeit-Updates und Statistiken.</p>
+            </div>
+            <div class="card">
+                <img src="https://source.unsplash.com/300x200/?api" alt="Projekt 3">
+                <h4>API-Integrator</h4>
+                <p>Verbindet sich mit mehreren APIs und zeigt Live-Daten an.</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="charts" class="charts">
+        <h3>Analytik in Aktion</h3>
+        <canvas id="myChart"></canvas>
+    </section>
+
+    <section id="contact" class="contact">
+        <h3>Kontaktieren Sie uns</h3>
+        <form>
+            <input type="text" placeholder="Ihr Name" required>
+            <input type="email" placeholder="Ihre E-Mail" required>
+            <textarea rows="5" placeholder="Ihre Nachricht" required></textarea>
+            <button type="submit">Nachricht senden</button>
+        </form>
+    </section>
+
+    <footer>
+        &copy; 2025 NächsteGen Fortgeschritten. Unterstützt von modernen Webtechnologien.
+    </footer>
+
+    <script>
+        const ctx = document.getElementById('myChart').getContext('2d');
+        const myChart = new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: ['HTML', 'CSS', 'JavaScript', 'Chart.js', 'Responsive'],
+                datasets: [{
+                    label: 'Fähigkeiten-Integration',
+                    data: [95, 90, 85, 80, 100],
+                    backgroundColor: [
+                        'rgba(255, 99, 132, 0.7)',
+                        'rgba(54, 162, 235, 0.7)',
+                        'rgba(255, 206, 86, 0.7)',
+                        'rgba(75, 192, 192, 0.7)',
+                        'rgba(153, 102, 255, 0.7)'
+                    ],
+                    borderColor: [
+                        'rgba(255, 99, 132, 1)',
+                        'rgba(54, 162, 235, 1)',
+                        'rgba(255, 206, 86, 1)',
+                        'rgba(75, 192, 192, 1)',
+                        'rgba(153, 102, 255, 1)'
+                    ],
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                responsive: true,
+                plugins: {
+                    legend: {
+                        display: true
+                    },
+                    tooltip: {
+                        enabled: true
+                    }
+                },
+                scales: {
+                    y: {
+                        beginAtZero: true
+                    }
+                }
+            }
+        });
+    </script>
+</body>
+</html>
